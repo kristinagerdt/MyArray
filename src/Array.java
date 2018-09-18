@@ -95,10 +95,10 @@ public class Array implements Iterable {
     }
 
     public boolean addAll(int index, int[] arrToAdd) {
-        if (!isIndexCorrect(index)) {
+        if (index < 0 || index > size) {
             return false;
         }
-        if (index == (size - 1)) {
+        if (index == (size)) {
             addAll(arrToAdd);
         } else {
             ensureCapacity(arrToAdd.length);
@@ -115,14 +115,14 @@ public class Array implements Iterable {
     }
 
     private void ensureCapacity(int lengthToAdd) {
-        int newSize;
-        if ((size + lengthToAdd) >= arr.length) {
-            if (((size + lengthToAdd) - arr.length) > 10) {
-                newSize = arr.length + lengthToAdd;
-            } else {
-                newSize = arr.length * 2;
+        int oldCapacity = arr.length;
+        int newCapacity;
+        if ((size + lengthToAdd) >= oldCapacity) {
+            newCapacity = oldCapacity + (oldCapacity * 2);
+            if ((newCapacity - lengthToAdd) < 0) {
+                newCapacity = lengthToAdd;
             }
-            arr = copyArray(newSize);
+            arr = copyArray(newCapacity);
         }
     }
 

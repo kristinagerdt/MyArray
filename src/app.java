@@ -14,7 +14,7 @@ public class app {
         array1.addAll(array2);
         array1.print();
 
-        array1.addAll(2, new int[]{5, 5, 5});
+        array1.addAll(8, new int[]{5, 5, 5});
         array1.print();
 
         array1.removeRange(2, 6);
