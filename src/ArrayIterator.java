@@ -17,7 +17,7 @@ public class ArrayIterator implements Iterator {
     }
 
     @Override
-    public Object next() {
+    public Integer next() {
         int res = arr[currIndex];
         currIndex++;
         return res;

@@ -56,6 +56,13 @@ public class Array implements Iterable {
         return oldValue;
     }
 
+    public boolean isIndexCorrect(int index) {
+        if (index < 0 || index >= size) {
+            return false;
+        }
+        return true;
+    }
+
     public boolean add(int number) {
         ensureCapacity(1);
         arr[size] = number;
@@ -64,7 +71,7 @@ public class Array implements Iterable {
     }
 
     public boolean addAtPosition(int index, int number) {
-        if (index >= size) {
+        if (!isIndexCorrect(index)) {
             return false;
         }
         ensureCapacity(1);
@@ -88,7 +95,7 @@ public class Array implements Iterable {
     }
 
     public boolean addAll(int index, int[] arrToAdd) {
-        if (index >= size || index < 0) {
+        if (!isIndexCorrect(index)) {
             return false;
         }
         if (index == (size - 1)) {
@@ -132,17 +139,11 @@ public class Array implements Iterable {
         if (foundIndex == -1) {
             return -1;
         }
-        int[] oldArr = copyArray(size);
-        int oldValue = arr[foundIndex];
-        size--;
-        for (int i = foundIndex; i < size; i++) {
-            arr[i] = oldArr[i + 1];
-        }
-        return oldValue;
+        return removeByIndex(foundIndex);
     }
 
     public int removeByIndex(int index) {
-        if (index < 0 || index >= size) {
+        if (!isIndexCorrect(index)) {
             return -1;
         }
         int[] oldArr = copyArray(size);
@@ -155,7 +156,7 @@ public class Array implements Iterable {
     }
 
     public boolean removeRange(int fromIndex, int toIndex) {
-        if (fromIndex < 0 || fromIndex > toIndex || fromIndex > size) {
+        if (!isIndexCorrect(fromIndex) || fromIndex > toIndex) {
             return false;
         }
         if (toIndex > size) {
